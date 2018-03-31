@@ -7,33 +7,33 @@ import java.util.List;
 import it.lorciv.lexi.util.Point;
 import it.lorciv.lexi.util.Rect;
 
-public class Row implements Glyph {
-
+public class Column implements Glyph {
+	
 	private List<Glyph> children;
 	private Rect bounds;
 	
-	public Row() {
+	public Column() {
 		children = new ArrayList<Glyph>();
 		bounds = new Rect(0, 0, 0, 0);
 	}
-	
+
 	@Override
-	public void draw(Graphics g) {		
+	public void draw(Graphics g) {
 		System.out.println("Start drawing " + toString());
 		Point currentPosition = bounds.getOrigin();
 		for (Glyph child : children) {
 			child.position(currentPosition);
 			child.draw(g);
-			currentPosition = currentPosition.sum(new Point(child.bounds().getWidth(), 0));
+			currentPosition = currentPosition.sum(new Point(0, child.bounds().getHeight()));
 		}
 		System.out.println("End drawing " + toString());
 	}
-	
+
 	@Override
 	public Rect bounds() {
 		return bounds;
 	}
-	
+
 	@Override
 	public boolean intersects(Point target) {
 		for (Glyph child : children) {
@@ -66,9 +66,9 @@ public class Row implements Glyph {
 		int height = 0;
 		
 		for (Glyph child : children) {
-			width += child.bounds().getWidth();
-			if (child.bounds().getHeight() > height) {
-				height = child.bounds().getHeight();
+			height += child.bounds().getHeight();
+			if (child.bounds().getWidth() > width) {
+				width = child.bounds().getWidth();
 			}
 		}
 		
@@ -77,7 +77,7 @@ public class Row implements Glyph {
 	
 	@Override
 	public String toString() {
-		return "Row of " + children.size() + " elements";
+		return "Column of " + children.size() + " elements";
 	}
 
 }

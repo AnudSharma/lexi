@@ -1,6 +1,7 @@
 package it.lorciv.lexi.model;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import it.lorciv.lexi.util.Point;
@@ -13,18 +14,20 @@ public class Character implements Glyph {
 	
 	public Character(char value) {
 		this.value = value;
-		bounds = new Rect(0, 0, 10, 10);
+		bounds = new Rect(0, 0, 15, 15);
+	}
+	
+	public char getValue() {
+		return value;
 	}
 	
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		g.drawRect(bounds.getOrigin().getX(), bounds.getOrigin().getY(), bounds.getWidth(), bounds.getHeight());
+		System.out.println("Drawing " + toString());
+		int x = bounds.getOrigin().getX() + 5;
+		int y = bounds.getOrigin().getY() + 12;
+		g.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		g.setColor(Color.BLACK);
-		
-		int x = bounds.getOrigin().getX();
-		int y = bounds.getOrigin().getY() + bounds.getHeight();
-		
 		g.drawString(value + "", x, y);
 	}
 	
@@ -55,7 +58,7 @@ public class Character implements Glyph {
 	
 	@Override
 	public String toString() {
-		return "Character " + value;
+		return "Character " + getValue();
 	}
 	
 }

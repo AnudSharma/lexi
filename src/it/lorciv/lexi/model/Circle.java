@@ -1,5 +1,6 @@
 package it.lorciv.lexi.model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import it.lorciv.lexi.util.Point;
@@ -12,14 +13,19 @@ public class Circle implements Glyph {
 	public Circle(int radius) {
 		bounds = new Rect(0, 0, radius * 2, radius * 2);
 	}
+	
+	public int getRadius() {
+		return bounds.getWidth() / 2;
+	}
 
 	@Override
 	public void draw(Graphics g) {
+		System.out.println("Drawing " + toString());
 		int x = bounds.getOrigin().getX();
 		int y = bounds.getOrigin().getY();
 		int w = bounds.getWidth();
 		int h = bounds.getHeight();
-		
+		g.setColor(Color.BLACK);
 		g.drawOval(x, y, w, h);
 	}
 
@@ -50,7 +56,7 @@ public class Circle implements Glyph {
 	
 	@Override
 	public String toString() {
-		return "Circle";
+		return "Circle r" + getRadius();
 	}
 
 }

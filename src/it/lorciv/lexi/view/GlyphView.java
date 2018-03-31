@@ -1,6 +1,6 @@
 package it.lorciv.lexi.view;
 
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -19,9 +19,13 @@ public class GlyphView extends JPanel {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		
 		document.draw(g);
+	}
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(document.bounds().getWidth(),
+				document.bounds().getHeight());
 	}
 
 }
